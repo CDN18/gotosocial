@@ -189,7 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		const currentText = timeTag.textContent.trim();
 		// Only format if current text contains precise time
 		if (currentText.match(/\d{2}:\d{2}/)) {
-			timeTag.textContent = new Date(datetime).toLocaleString();
+			const date = new Date(datetime);
+			timeTag.textContent = date.toLocaleString(undefined, {
+				year: 'numeric',
+				month: 'short',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
+			});
 		}
 	});
 });
