@@ -68,6 +68,7 @@ export default function Import() {
 						<option value="">- 选择导入类型 -</option>
 						<option value="following">关注列表</option>
 						<option value="blocks">账户屏蔽列表</option>
+						<option value="mutes">账户隐藏列表</option>
 					</>
 				}>
 			</Select>
