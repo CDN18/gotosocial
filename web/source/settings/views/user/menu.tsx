@@ -64,7 +64,7 @@ export default function UserMenu() {
 				icon="fa-floppy-o"
 			/>
 			<MenuItem
-				name="Access Tokens"
+				name="访问令牌"
 				itemUrl="tokens"
 				icon="fa-certificate"
 			/>

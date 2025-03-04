@@ -90,18 +90,18 @@ export default function TokensSearchForm() {
 			>
 				<Select
 					field={form.limit}
-					label="Items per page"
+					label="每页显示数量"
 					options={
 						<>
 							<option value="20">20</option>
 							<option value="50">50</option>
-							<option value="0">No limit / show all</option>
+							<option value="0">无限制 / 显示全部</option>
 						</>
 					}
 				></Select>
 				<MutationButton
 					disabled={false}
-					label={"Search"}
+					label={"搜索"}
 					result={searchRes}
 				/>
 			</form>
@@ -113,7 +113,7 @@ export default function TokensSearchForm() {
 				itemToEntry={itemToEntry}
 				isError={searchRes.isError}
 				error={searchRes.error}
-				emptyMessage={<b>No tokens found.</b>}
+				emptyMessage={<b>未找到令牌。</b>}
 				prevNextLinks={searchRes.data?.links}
 			/>
 		</>
@@ -171,32 +171,32 @@ function TokenInfoListEntry({ tokenInfo }: TokenInfoListEntryProps) {
 		>
 			<dl className="info-list">
 				<div className="info-list-entry">
-					<dt>App name:</dt>
+					<dt>应用名称：</dt>
 					<dd className="text-cutoff">{tokenInfo.application.name}</dd>
 				</div>
 				{ appWebsite && 
 					<div className="info-list-entry">
-						<dt>App website:</dt>
+						<dt>应用网站：</dt>
 						<dd className="text-cutoff">{appWebsite}</dd>
 					</div>
 				}
 				<div className="info-list-entry">
-					<dt>Scope:</dt>
+					<dt>授权范围：</dt>
 					<dd className="text-cutoff monospace">{tokenInfo.scope}</dd>
 				</div>
 				<div className="info-list-entry">
-					<dt>Created:</dt>
+					<dt>创建时间：</dt>
 					<dd className="text-cutoff">{created}</dd>
 				</div>
 				<div className="info-list-entry">
-					<dt>Last used:</dt>
+					<dt>上次使用：</dt>
 					<dd className="text-cutoff">{lastUsed}</dd>
 				</div>
 			</dl>
 			<div className="action-buttons">
 				<MutationButton
-					label={`Invalidate token`}
-					title={`Invalidate token`}
+					label={`撤销`}
+					title={`撤销`}
 					type="button"
 					className="button danger"
 					onClick={(e) => {

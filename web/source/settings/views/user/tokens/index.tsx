@@ -24,24 +24,21 @@ export default function Tokens() {
 	return (
 		<div className="tokens-view">
 			<div className="form-section-docs">
-				<h1>Access Tokens</h1>
+				<h1>访问令牌</h1>
 				<p>
-					On this page you can search through access tokens owned by applications that you have authorized to
-					access your account and/or perform actions on your behalf. You can invalidate a token by clicking on
-					the invalidate button under a token. This will remove the token from the database.
+					在这里，你可以搜索你已被授权访问您的帐户和/或代表你执行操作的应用的访问令牌。 你可以通过点击令牌下的“撤销”按钮来使令牌失效。 这将从数据库中删除令牌。
 					<br/><br/>
 					<strong>
-						If you see any tokens from applications that you do not recognize, or do not remember authorizing to access
-						your account, then you should invalidate them, and consider changing your password as soon as possible.
+						如果你看到任何来自你不认识的应用的令牌，或者不记得你授权过它们访问你的帐户，那么你应该撤销对应的访问令牌，并考虑尽快更改您的密码。
 					</strong>
 				</p>
 				<a
-					href="https://docs.gotosocial.org/en/latest/user_guide/settings/#access-tokens"
+					href="https://docs.gotosocial.org/zh-cn/latest/user_guide/settings/#访问令牌"
 					target="_blank"
 					className="docslink"
 					rel="noreferrer"
 				>
-					Learn more about managing your access tokens (opens in a new tab)
+					了解更多关于管理您的访问令牌的信息（在新标签页中打开）
 				</a>
 			</div>
 			<TokensSearchForm />
