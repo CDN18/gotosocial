@@ -21,10 +21,12 @@ import (
 	"context"
 	"fmt"
 	"reflect"
+	"strings"
 
 	newmodel "github.com/superseriousbusiness/gotosocial/internal/db/bundb/migrations/20250305205820_content_warning_fixes"
 	"github.com/superseriousbusiness/gotosocial/internal/log"
 	"github.com/uptrace/bun"
+	"github.com/uptrace/bun/dialect"
 )
 
 func init() {
@@ -40,11 +42,31 @@ func init() {
 			}
 
 			log.Info(ctx, "adding statuses.content_warning_text column...")
-			_, err = tx.NewAddColumn().Model(newStatus).
-				ColumnExpr(colDef).
-				Exec(ctx)
-			if err != nil {
-				return fmt.Errorf("error adding column: %w", err)
+
+			switch tx.Dialect().Name() {
+			case dialect.SQLite:
+				_, err = tx.NewAddColumn().Model(newStatus).
+					ColumnExpr(colDef).
+					Exec(ctx)
+				if err != nil && !strings.Contains(err.Error(), "duplicate column name") {
+					return fmt.Errorf("error adding column: %w", err)
+				}
+
+			case dialect.PG:
+				if _, err = tx.
+					NewAddColumn().
+					Model(newStatus).
+					// We need to explicitly set the column type for PostgreSQL.
+					// PostgreSQL somehow requires a specific length for
+					// bundb-generated varchar columns(mapped from string by default).
+					ColumnExpr("? VARCHAR", bun.Ident("content_warning_text")).
+					IfNotExists().
+					Exec(ctx); err != nil {
+					return fmt.Errorf("error adding column: %w", err)
+				}
+
+			default:
+				panic("unsupported db type")
 			}
 
 			return nil
